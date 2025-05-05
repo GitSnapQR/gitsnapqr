@@ -1,0 +1,131 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclaimer - GitSnap QR</title>
+</head>
+<body>
+    <div>
+        <h1>Disclaimer</h1>
+        <p><strong>Effective Date: May 4, 2025</strong></p>
+        <p>GitSnap QR ("we," "us," "our," or "Company") provides this Disclaimer to clarify the nature, scope, and limitations of the information, products, and services offered through our website and related platforms (collectively, "Services"). By accessing or using our Services, you acknowledge and agree to the terms and conditions set forth in this Disclaimer. This Disclaimer is intended to ensure transparency and compliance with applicable laws, including but not limited to the Information Technology Act, 2000, and other relevant regulations in India.</p>
+
+        <h2>1. General Information</h2>
+        <p>The content, materials, and information provided on our website and through our Services are for general informational purposes only. While we strive to ensure the accuracy, completeness, and timeliness of the information presented, we make no representations or warranties, express or implied, regarding the reliability, suitability, or availability of such content. The use of our Services is at your sole risk, and you are responsible for verifying the accuracy of any information before relying on it.</p>
+
+        <h2>2. User-Provided Content</h2>
+        <p>Our Services allow users to upload images, text, or other materials ("User Content") to create personalized QR codes, e-letters, or physical gift products. You are solely responsible for the legality, appropriateness, and ownership of any User Content you submit. Specifically:</p>
+        <ul>
+            <li>You represent and warrant that you have all necessary rights, licenses, or permissions to use, upload, and share User Content, and that such content does not infringe upon any intellectual property rights, privacy rights, or other legal rights of third parties.</li>
+            <li>We do not endorse, verify, or assume responsibility for the accuracy, legality, or appropriateness of User Content. We are not liable for any claims, damages, or losses arising from the use, misuse, or distribution of User Content, including but not limited to copyright infringement, defamation, or privacy violations.</li>
+            <li>We reserve the right to refuse, remove, or suspend processing of any User Content that violates our Terms of Service, this Disclaimer, or applicable laws, at our sole discretion.</li>
+        </ul>
+
+        <h2>3. Product and Service Limitations</h2>
+        <p>Our Services, including the creation and delivery of personalized QR codes, e-letters, and physical gifts, are provided on an "as-is" and "as-available" basis. We do not guarantee:</p>
+        <ul>
+            <li>The uninterrupted or error-free operation of our website or Services.</li>
+            <li>The compatibility, functionality, or accessibility of QR codes across all devices, applications, or platforms.</li>
+            <li>The timely delivery of physical products, which may be subject to delays caused by third-party shipping providers, force majeure events, or other factors beyond our control.</li>
+            <li>The quality, durability, or performance of physical products beyond the specifications provided at the time of purchase.</li>
+        </ul>
+        <p>Any descriptions, images, or specifications of products on our website are for illustrative purposes and may not reflect the exact appearance or functionality of the final product.</p>
+
+        <h2>4. Third-Party Services</h2>
+        <p>We engage third-party service providers to facilitate certain aspects of our Services, including but not limited to payment processing, shipping, and hosting. We are not responsible for the actions, omissions, or performance of these third parties, including:</p>
+        <ul>
+            <li>Errors or delays in payment processing or shipping caused by third-party providers.</li>
+            <li>The security, privacy practices, or terms of service of third-party websites or services linked from our website.</li>
+        </ul>
+        <p>You are encouraged to review the terms and policies of any third-party services you interact with through our platform.</p>
+
+        <h2>5. No Warranty</h2>
+        <p>To the fullest extent permitted by law, we disclaim all warranties, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, and non-infringement. We do not warrant that:</p>
+        <ul>
+            <li>The Services will meet your specific requirements or expectations.</li>
+            <li>The Services will be free from errors, defects, or vulnerabilities.</li>
+            <li>The results obtained from using our Services will be accurate, reliable, or satisfactory.</li>
+        </ul>
+        <p>Any reliance on our Services or the information provided therein is at your own risk.</p>
+
+        <h2>6. Limitation of Liability</h2>
+        <p>To the maximum extent permitted by applicable law, GitSnap QR, its affiliates, officers, directors, employees, agents, or representatives shall not be liable for any direct, indirect, incidental, consequential, special, or punitive damages arising from or related to:</p>
+        <ul>
+            <li>Your use of or inability to use our Services.</li>
+            <li>Errors, omissions, or inaccuracies in the content or products provided.</li>
+            <li>Loss, misuse, or unauthorized access to User Content or personal information caused by third-party actions, user error, or factors beyond our reasonable control.</li>
+            <li>Delays, damages, or losses related to the delivery or performance of physical products.</li>
+            <li>Any reliance on information or materials provided through our Services.</li>
+        </ul>
+        <p>In no event shall our total liability exceed the amount paid by you for the specific Service giving rise to the claim.</p>
+
+        <h2>7. Indemnification</h2>
+        <p>You agree to indemnify, defend, and hold harmless GitSnap QR, its affiliates, officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, or expenses (including reasonable legal fees) arising from:</p>
+        <ul>
+            <li>Your use of our Services in violation of this Disclaimer, our Terms of Service, or applicable laws.</li>
+            <li>The submission, use, or distribution of User Content that infringes upon the rights of third parties or violates applicable laws.</li>
+            <li>Any breach of your representations or warranties regarding User Content or your use of our Services.</li>
+        </ul>
+
+        <h2>8. External Links</h2>
+        <p>Our website may contain links to external websites or resources operated by third parties. These links are provided for convenience only, and we do not endorse or assume responsibility for the content, accuracy, or practices of such third-party sites. Accessing external links is at your own risk, and we recommend reviewing the terms and policies of those sites.</p>
+
+        <h2>9. Force Majeure</h2>
+        <p>We shall not be liable for any failure or delay in performing our obligations under the Services due to events beyond our reasonable control, including but not limited to natural disasters, pandemics, government actions, labor disputes, power outages, or technical failures.</p>
+
+        <h2>10. Modifications to this Disclaimer</h2>
+        <p>We reserve the right to modify or update this Disclaimer at our sole discretion to reflect changes in our practices, legal requirements, or operational needs. Any changes will be effective upon posting the revised Disclaimer on our website, with the updated "Effective Date" indicated. Your continued use of our Services following such changes constitutes your acceptance of the revised Disclaimer. We encourage you to review this Disclaimer periodically.</p>
+
+        <h2>11. Contact Information</h2>
+        <p>If you have any questions, concerns, or inquiries regarding this Disclaimer or our Services, please contact us at:</p>
+        <p>
+            GitSnap QR<br>
+            Email: <a href="mailto:support@gitsnapqr.com">gitsnapqr@gmail.com.com</a><br>
+            Phone: +91 87674 25692<br>
+        </p>
+
+        <h2>12. Governing Law and Jurisdiction</h2>
+        <p>This Disclaimer shall be governed by and construed in accordance with the laws of India. Any disputes arising under or in connection with this Disclaimer shall be subject to the exclusive jurisdiction of the courts in India.</p>
+    </div>
+</body>
+</html>

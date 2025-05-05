@@ -1,0 +1,155 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - GitSnap QR</title>
+</head>
+<body>
+    <div>
+        <h1>Privacy Policy</h1>
+        <p><strong>Effective Date: May 4, 2025</strong></p>
+        <p>GitSnap QR ("we," "us," "our," or "Company") is committed to safeguarding the privacy of our customers, users, and website visitors. This Privacy Policy ("Policy") governs the collection, use, storage, disclosure, and protection of personal information obtained through our website, products, and services (collectively, "Services"). By accessing or using our Services, you acknowledge and consent to the practices described in this Policy. This Policy complies with applicable data protection laws and regulations, including but not limited to the Information Technology Act, 2000, and the Digital Personal Data Protection Act, 2023 (India).</p>
+
+        <h2>1. Definitions</h2>
+        <p>For the purposes of this Policy:</p>
+        <ul>
+            <li><strong>Personal Information:</strong> Any information relating to an identified or identifiable individual, including but not limited to name, email address, phone number, postal address, and payment details.</li>
+            <li><strong>User Content:</strong> Any images, text, or other materials provided by users to customize products or services, such as QR codes, e-letters, or physical gifts.</li>
+            <li><strong>Non-Personal Information:</strong> Aggregated or anonymized data that does not directly identify an individual, such as website usage statistics.</li>
+        </ul>
+
+        <h2>2. Information Collection</h2>
+        <p>We collect information to facilitate the provision of our Services, enhance user experience, and comply with legal obligations. The categories of information collected include:</p>
+        <ul>
+            <li><strong>Personal Information:</strong> Collected when you place an order, submit a contact form, or communicate with us. This may include your full name, email address, telephone number, billing and shipping addresses, and payment information (e.g., credit/debit card details or UPI identifiers).</li>
+            <li><strong>User Content:</strong> Images, messages, or other materials uploaded or submitted for personalization of QR codes, e-letters, or physical gift products.</li>
+            <li><strong>Technical and Usage Data:</strong> Automatically collected data, including IP addresses, browser type, operating system, device identifiers, referral URLs, pages visited, and timestamps of interactions with our website.</li>
+            <li><strong>Cookies and Similar Technologies:</strong> We deploy cookies, web beacons, and other tracking mechanisms to monitor website performance, personalize content, and analyze user behavior. Users may configure their browser settings to refuse cookies, though this may limit certain functionalities.</li>
+        </ul>
+
+        <h2>3. Use of Information</h2>
+        <p>We process collected information for the following purposes:</p>
+        <ul>
+            <li>To process, fulfill, and deliver orders, including the creation and delivery of personalized QR codes, e-letters, and physical gifts.</li>
+            <li>To provide customer support, respond to inquiries, and communicate order-related updates.</li>
+            <li>To enhance and optimize our Services by analyzing usage patterns, user feedback, and website performance metrics.</li>
+            <li>To send marketing communications, such as newsletters or promotional offers, where users have provided explicit consent. Users may opt out at any time via unsubscribe links or by contacting us.</li>
+            <li>To detect, prevent, and address fraudulent activities, security breaches, or violations of our Terms of Service.</li>
+            <li>To comply with applicable legal obligations, including tax reporting and record-keeping requirements.</li>
+        </ul>
+
+        <h2>4. User Content Responsibility</h2>
+        <p>Users are solely responsible for the content they provide, including images, text, or other materials used to customize products. You represent and warrant that:</p>
+        <ul>
+            <li>You have the necessary rights, licenses, or permissions to use and share such content.</li>
+            <li>The content does not violate any intellectual property rights, privacy rights, or applicable laws, including but not limited to copyright, trademark, or defamation laws.</li>
+            <li>The content is not obscene, defamatory, or otherwise objectionable.</li>
+        </ul>
+        <p>We do not assume liability for any loss, misuse, or unauthorized access to User Content resulting from third-party actions, user error, or factors beyond our reasonable control. We reserve the right to remove or refuse to process any content that violates this Policy or our Terms of Service.</p>
+
+        <h2>5. Disclosure of Information</h2>
+        <p>We do not sell, lease, or otherwise disclose your Personal Information to third parties except as described below:</p>
+        <ul>
+            <li><strong>Third-Party Service Providers:</strong> We engage trusted vendors to perform functions such as payment processing, order fulfillment, shipping, hosting, and analytics. These providers are bound by contractual obligations to process your information only on our behalf and maintain its confidentiality.</li>
+            <li><strong>Legal Compliance:</strong> We may disclose information to comply with legal obligations, such as responding to lawful requests from government authorities, court orders, or subpoenas, or to protect our legal rights, property, or safety.</li>
+            <li><strong>Corporate Transactions:</strong> In the event of a merger, acquisition, reorganization, or asset sale, your information may be transferred to the acquiring entity. We will notify you of such transactions and your options regarding your information.</li>
+        </ul>
+
+        <h2>6. Data Security</h2>
+        <p>We implement industry-standard technical and organizational measures to protect your information against unauthorized access, alteration, disclosure, or destruction. These measures include encryption, secure socket layer (SSL) technology, access controls, and regular security assessments. However, no system is entirely impervious to risks, and we cannot guarantee the absolute security of your information during transmission or storage.</p>
+
+        <h2>7. Data Retention</h2>
+        <p>We retain Personal Information and User Content only for as long as necessary to fulfill the purposes outlined in this Policy, including order fulfillment, customer support, and legal compliance. For example:</p>
+        <ul>
+            <li>Order-related information is retained for the duration required by tax and accounting regulations.</li>
+            <li>User Content is retained for a limited period post-fulfillment to address potential customer service requests, unless deletion is requested.</li>
+        </ul>
+        <p>Upon expiration of the retention period, we securely delete or anonymize your information in accordance with applicable laws.</p>
+
+        <h2>8. Your Rights</h2>
+        <p>Subject to applicable data protection laws, you may have the following rights regarding your Personal Information:</p>
+        <ul>
+            <li><strong>Access:</strong> Request a copy of the Personal Information we hold about you.</li>
+            <li><strong>Rectification:</strong> Request correction of inaccurate or incomplete information.</li>
+            <li><strong>Erasure:</strong> Request deletion of your information, subject to legal or contractual retention obligations.</li>
+            <li><strong>Restriction:</strong> Request that we restrict the processing of your information in certain circumstances.</li>
+            <li><strong>Objection:</strong> Object to the processing of your information for marketing purposes or on grounds relating to your particular situation.</li>
+            <li><strong>Data Portability:</strong> Request a transferable copy of your information in a structured, commonly used, and machine-readable format.</li>
+        </ul>
+        <p>To exercise these rights, please submit a written request to <a href="mailto:gitsnapqr@gmail.com">support@gitsnapqr.com</a>. We will respond within the timeframes prescribed by applicable law, typically within 30 days.</p>
+
+        <h2>9. Cookies and Tracking Technologies</h2>
+        <p>Our website uses cookies and similar technologies to enhance functionality, analyze performance, and deliver targeted advertising. Cookies may include:</p>
+        <ul>
+            <li><strong>Essential Cookies:</strong> Necessary for website operation, such as maintaining user sessions.</li>
+            <li><strong>Analytics Cookies:</strong> Collect anonymized data to understand user behavior and improve our Services.</li>
+            <li><strong>Marketing Cookies:</strong> Enable personalized advertisements based on your browsing activity.</li>
+        </ul>
+        <p>You may disable cookies via your browser settings, but this may impair website functionality. For more information, please review our Cookie Policy (available upon request).</p>
+
+        <h2>10. Third-Party Links and Services</h2>
+        <p>Our Services may include links to third-party websites, applications, or services. We are not responsible for the privacy practices, content, or security of these third parties. We recommend reviewing the privacy policies of any third-party services you access.</p>
+
+        <h2>11. Children's Privacy</h2>
+        <p>Our Services are not directed to individuals under the age of 18. We do not knowingly collect or process Personal Information from minors. If we discover that a minor has provided Personal Information, we will promptly delete it and terminate any associated account.</p>
+
+        <h2>12. International Data Transfers</h2>
+        <p>Our operations are based in India, but we may engage service providers located in other jurisdictions. Consequently, your Personal Information may be transferred to, stored, or processed in countries outside your country of residence. We ensure that such transfers comply with applicable data protection laws and are subject to appropriate safeguards, such as standard contractual clauses or data protection agreements.</p>
+
+        <h2>13. Amendments to This Policy</h2>
+        <p>We reserve the right to modify this Policy at our discretion to reflect changes in our practices, legal requirements, or operational needs. Any material changes will be communicated by updating the Policy on our website and, where required by law, notifying you via email or other means. The "Effective Date" at the top of this Policy indicates the date of the most recent revision. Your continued use of our Services following such changes constitutes acceptance of the revised Policy.</p>
+
+        <h2>14. Contact Information</h2>
+        <p>For questions, concerns, or complaints regarding this Policy or our data practices, please contact our Data Protection Officer at:</p>
+        <p>
+            GitSnap QR<br>
+            Email: <a href="mailto:gitsnapqr@gmail.com">gitsnapqr@gmail.com</a><br>
+            Phone: +91 87674 25692<br>
+        </p>
+        <p>We will endeavor to address your inquiries promptly and in accordance with applicable law. If you are dissatisfied with our response, you may lodge a complaint with the relevant data protection authority in your jurisdiction.</p>
+
+        <h2>15. Governing Law</h2>
+        <p>This Policy shall be governed by and construed in accordance with the laws of India. Any disputes arising under or in connection with this Policy shall be subject to the exclusive jurisdiction of the courts in India.</p>
+    </div>
+</body>
+</html>

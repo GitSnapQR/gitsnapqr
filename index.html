@@ -1,0 +1,156 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitSnap QR - Personalized Gifts</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <a href="#home"><img src="https://iili.io/3jfGvPs.png" alt="GitSnap QR"></a>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav>
+            <ul id="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>Make Every Scan a Memory 💖</h1>
+        <p>Personalized QR code embedded with 100's+ images that create lasting memories with every scan</p>
+        <a href="#products" class="btn">Create Your Gift 🎀</a>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products fade-in">
+        <h2>Our Packages</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://iili.io/3jyaACv.png" alt="Digital Delight">
+                <h3>Digital Delight</h3>
+                <p>Customized QR Code + Beautiful E-Letter <br> [Soft copy only]</p>
+                <div class="price">
+                    <span class="original-price">₹800</span>
+                    <span class="discounted-price">₹399</span>
+                    <span class="discount">50% OFF</span>
+                </div>
+                <a href="#" class="btn choose-btn">Choose</a>
+            </div>
+            <div class="product-card">
+                <img src="https://iili.io/3jqXvtV.png" alt="Premium Frame">
+                <h3>Premium Frame</h3>
+                <p>Luxury Frame + Beautiful E-Letter <br> [Hard copy - Delivered!]</p>
+                <div class="price">
+                    <span class="original-price">₹1500</span>
+                    <span class="discounted-price">₹699</span>
+                    <span class="discount">53% OFF</span>
+                </div>
+                <a href="#" class="btn choose-btn">Choose</a>
+            </div>
+            <div class="product-card most-popular">
+                <div class="popular-badge">Most Popular ✨</div>
+                <div class="image-container">
+                    <img src="https://iili.io/3jnIAU7.png" alt="Ultimate Love Experience">
+                    <img src="https://iili.io/3jnqBC7.jpg" alt="Website Preview">
+                </div>
+                <h3>Ultimate Love Experience</h3>
+                <p>Physical Gift + Custom Website + Beautiful E-Letter <br>[Hard copy - Delivered!]</p>
+                <div class="price">
+                    <span class="original-price">₹2250</span>
+                    <span class="discounted-price">₹899</span>
+                    <span class="discount">60% OFF</span>
+                </div>
+                <a href="#" class="btn choose-btn">Choose</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works fade-in">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <img src="https://img.icons8.com/ios-filled/100/ff6b8b/gift.png" alt="Choose Your Package">
+                <h3>Choose Your Package</h3>
+                <p>Select from Digital Delight, Premium Frame, or Ultimate Love Experience.</p>
+            </div>
+            <div class="step">
+                <img src="https://img.icons8.com/ios-filled/100/ff6b8b/pencil.png" alt="Customize Your Gift">
+                <h3>Customize Your Gift</h3>
+                <p>Upload images, write a message, and personalize your QR code.</p>
+            </div>
+            <div class="step">
+                <img src="https://img.icons8.com/ios-filled/100/ff6b8b/share.png" alt="Share with Loved Ones">
+                <h3>Share with Loved Ones</h3>
+                <p>Receive your gift and share it with your loved ones for a memorable experience.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo fade-in">
+        <h2 style="margin-bottom: 1.25rem;">Scan → Reveal → Cherish Forever 💞 <br> Demo 👇</h2>
+        <div class="Demo">
+            <video style="max-width: 100%; height: auto; border-radius: 12px; border: 5px solid #ffd3d8; display: block; margin: 0 auto;" style="border-radius: 1.5rem;" controls loop>
+                <source src="WhatsApp Video 2025-05-04 at 14.18.54_8e1e3682.mp4" autoplay type="video/mp4">
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="cta fade-in">
+        <h2 style="margin-bottom: 1.25rem;">Ready to Create a Lasting Memory?</h2>
+        <a href="#products" class="btn">Start Creating Now</a>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer fade-in">
+        <h2>Contact Us</h2>
+        <form action="https://formspree.io/f/xanoekyk" method="post" id="contactForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="btn">Send</button>
+        </form>
+        <p>Made with ❤️ in India</p>
+        <p style="font-size: 1rem;"> <a href="mailto:gitsnapqr@gmail.com"> Contact: gitsnapqr@gmail.com / contact@gitsnapqr.com </a></p>
+        <p style="font-size: 1rem;">Phone: +91 87674 25692</p>
+        <div class="social-media">
+            <!-- Add social media icons here -->
+        </div>
+        <p style="font-size: 0.75rem; color: rgb(255, 153, 170);">
+            <a href="Privacy Policy.html"> Privacy Policy  </a> 
+             | 
+            <a href="Disclaimer.html"> Disclaimer </a></p>
+            </style>
+        </p>
+    </footer>
+
+    <a href="#home" class="back-to-top">↑</a>
+
+    <script src="script.js"></script>
+</body>
+</html>
